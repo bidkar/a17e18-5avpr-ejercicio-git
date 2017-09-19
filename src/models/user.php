@@ -41,7 +41,7 @@ class User {
         }
     }
 
-    public function all() {
+    public static function All() {
         $cnn = new MySQL();
         $sql = "SELECT id,name,firstname,lastname,email FROM users";
         $rst = $cnn->query($sql);

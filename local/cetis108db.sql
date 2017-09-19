@@ -18,3 +18,6 @@ create table users (
 
 insert into users (name,firstname,lastname,email,password) values
 ('bidkar','BIDKAR','ARAGON','bidkar@cetis108.edu.mx',sha('123'));
+
+insert into `users` (name,firstname,lastname,email,password) values
+('guadalupe','Guadalupe','Bernal','gpe@bernal','123');

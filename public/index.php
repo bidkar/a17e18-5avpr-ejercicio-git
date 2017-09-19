@@ -3,18 +3,17 @@ require_once '../src/app/db/mysql.php';
 require_once '../src/models/user.php';
 use Models\User;
 
-// $usuario = new User();
-// var_dump($usuario->FindById(1));
-// 1: error en la consulta, 2: bool false, 3: object Models\User
-$id = 10;
-$resultado = User::FindById($id);
+// $id = 1;
+// $resultado = User::FindById($id);
+
+$resultado = User::All();
+var_dump($resultado);
+
 if ($resultado == false) {
-    // imprimir que no encontro al usuario
     echo "El usuario con id=$id no fue encontrado.";
 } else {
-    // table>(thead>tr>th*5)+(tbody>tr>td*5)
 ?>
-    <table>
+    <table border="1" cellspacing="0" cellpadding="5">
         <thead>
             <tr>
                 <th>ID</th>
@@ -25,13 +24,18 @@ if ($resultado == false) {
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td><?php echo $resultado->id; ?></td>
-                <td><?php echo $resultado->name; ?></td>
-                <td><?php echo $resultado->firstname; ?></td>
-                <td><?php echo $resultado->lastname; ?></td>
-                <td><?php echo $resultado->email; ?></td>
-            </tr>
+            <?php
+            foreach ($resultado as $usuario) {
+                echo
+                "<tr>".
+                    "<td>$usuario->id</td>".
+                    "<td>$usuario->name</td>".
+                    "<td>$usuario->firstname</td>".
+                    "<td>$usuario->lastname</td>".
+                    "<td>$usuario->email</td>".
+                "</tr>";
+            }
+            ?>
         </tbody>
     </table>
 <?php
