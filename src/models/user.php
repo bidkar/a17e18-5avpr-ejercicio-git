@@ -65,4 +65,34 @@ class User {
             return $usuarios;
         }
     }
+
+    // CRUD - Create Read Update Delete
+    public static function Create($name,$firstname,$lastname,$email,$password) {
+        if (!ValidateExistingUser()) {
+            echo 'Usuario o email existente';
+        } else {
+            $cnn = new MySQL();
+            $sql = "INSERT INTO users (name,firstname,lastname,email,password) VALUES ";
+            $sql.= sprintf("('%s','%s','%s','%s',sha('%s'))",$name,$firstname,$lastname,$email,$password);
+            $rst = $cnn->query($sql);
+            $cnn->close();
+
+            return $rst;
+        }
+    }
+
+    private function ValidateExistingUser($name, $email) {
+        $cnn = new MySQL();
+        $sql = sprintf("SELECT id FROM users WHERE name='%s' OR email='%s'", $name, $email);
+        $rst = $cnn->query($sql);
+        $cnn->close();
+
+        if (!$rst) {
+            die('Error en la consulta');
+        } elseif ($rst->num_rows > 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }
