@@ -68,8 +68,8 @@ class User {
 
     // CRUD - Create Read Update Delete
     public static function Create($name,$firstname,$lastname,$email,$password) {
-        if (!ValidateExistingUser()) {
-            echo 'Usuario o email existente';
+        if (User::ValidateExistingUser($name, $email)) {
+            return 'Usuario o email existente';
         } else {
             $cnn = new MySQL();
             $sql = "INSERT INTO users (name,firstname,lastname,email,password) VALUES ";
@@ -81,7 +81,7 @@ class User {
         }
     }
 
-    private function ValidateExistingUser($name, $email) {
+    private static function ValidateExistingUser($name, $email) {
         $cnn = new MySQL();
         $sql = sprintf("SELECT id FROM users WHERE name='%s' OR email='%s'", $name, $email);
         $rst = $cnn->query($sql);
@@ -89,10 +89,31 @@ class User {
 
         if (!$rst) {
             die('Error en la consulta');
-        } elseif ($rst->num_rows > 0) {
+        } elseif ($rst->num_rows == 0) {
             return false;
         } else {
             return true;
+        }
+    }
+
+    public static function Login($name,$passwd) {
+        $cnn = new MySQL();
+        $sql = sprintf("SELECT * FROM users WHERE name='%s' AND password=sha('%s')",$name, $passwd);
+        $rst = $cnn->query($sql); // mysqli_result::fetch_assoc()
+        $cnn->close(); // cerrar conexion a mysql
+        if (!$rst) {
+            die('Error en la consulta');
+        } elseif ($rst->num_rows == 0) {
+            return false;
+        } else {
+            $r = $rst->fetch_assoc();
+            $usuario = new User();
+            $usuario->id = $r['id'];
+            $usuario->name = $r['name'];
+            $usuario->firstname = $r['firstname'];
+            $usuario->lastname = $r['lastname'];
+            $usuario->email = $r['email'];
+            return $usuario;
         }
     }
 }
