@@ -3,8 +3,18 @@ require_once '../src/app/db/mysql.php';
 require_once '../src/models/user.php';
 use Models\User;
 
-// $resultado = User::Create('gabriel','Gabriel','Vega','gabriel@mail','123');
-// var_dump($resultado);
+if (isset($_POST['usuario']) && isset($_POST['passwd'])) {
+    $usuario = $_POST['usuario'];
+    $passwd = $_POST['passwd'];
+    $resultado = User::Login($usuario,$passwd);
+    $mensaje = '';
+    if (!$resultado) {
+        $mensaje = "El usuario o contraseña es incorrecto";
+    } else {
+        $mensaje = "El usuario $usuario puede iniciar sesión";
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -22,17 +32,22 @@ use Models\User;
 </head>
 <body>
     <!-- Inicio formulario login -->
+    <?php
+    if (isset($mensaje)) {
+        echo "<p>$mensaje</p>";
+    }
+    ?>
     <div id="login-form">
         <form action="#" id="loginform" method="post">
             <fieldset>
                 <legend>Formulario de sesión</legend>
                 <div>
                     <label for="usuario">Usuario:</label>
-                    <input type="text" name="usuario" id="">
+                    <input type="text" name="usuario" id="usuario">
                 </div>
                 <div>
                     <label for="passwd">Contraseña:</label>
-                    <input type="password" name="passwd" id="">
+                    <input type="password" name="passwd" id="passwd">
                 </div>
                 <a href="#">¿Olvidaste tu contraseña?</a>
                 <button type="submit">Iniciar sesión</button>
