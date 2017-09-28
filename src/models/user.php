@@ -116,4 +116,43 @@ class User {
             return $usuario;
         }
     }
+
+    public static function Delete($id) {
+        $cnn = new MySQL();
+        $sql = sprintf("DELETE FROM users where id=%d",$id);
+        $rst = $cnn->query($sql);
+        $cnn->close();
+
+        if (!$rst) {
+            die("Error en la consulta: $sql");
+        } else {
+            return $rst;
+        }
+    }
+
+    public function Update() {
+        $cnn = new MySQL();
+        $sql = sprintf("UPDATE users SET firstname='%s', lastname='%s' WHERE id=%d",$this->firstname, $this->lastname, $this->id);
+        $rst = $cnn->query($sql);
+        $cnn->close();
+
+        if (!$rst) {
+            die("Error en la consulta: $sql");
+        } else {
+            return $rst;
+        }
+    }
+
+    public function ChangePassword($password) {
+        $cnn = new MySQL();
+        $sql = sprintf("UPDATE users SET password=sha('%s') WHERE id=%d",$password, $this->id);
+        $rst = $cnn->query($sql);
+        $cnn->close();
+
+        if (!$rst) {
+            die("Error en la consulta: $sql");
+        } else {
+            return $rst;
+        }
+    }
 }
