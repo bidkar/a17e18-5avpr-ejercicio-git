@@ -12,8 +12,8 @@ return
         // $path = '/Applications/XAMPP/xamppfiles/htdocs/a17e18-5avpr-ejercicio-git/src/models/user.php';
 
         if (is_readable($path)) {
-            require $path;
+            require_once $path;
         } else {
-            die("Error: no se puede enconctrar el archivo $path");
+            return false;
         }
 	});

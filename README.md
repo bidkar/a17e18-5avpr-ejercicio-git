@@ -37,3 +37,14 @@ $ mv a17e18-5avpr-ejercicio-git biblioteca-cetis108
 
 ## Pruebas
 Pasos para probar que el proyecto es funcional.
+
+## Funcionamiento del sitio
+http://bibliotecav.dev
+/Applications/XAMPP/xamppfiles/htdocs/a17e18-5avpr-ejercicio-git/public
+1. index.php
+  - Todo lo que llegue escrito despues de .dev/ se queda en la variable $_GET['url']
+2. Llamar al ruteador con el método solicitado get ó post pasandole el valor de la variable $_GET['url'] en caso de existir
+  - Deserializar el valor de $_GET['url'] para identificar la forma de llamar al controlador indicado con la acción y los parámetros requeridos en caso de existir éstos.
+  - Llamar al controlador requerido con su acción y parámetros.
+3. Ejecutar la acción solicitada que terminará en el llamado de una vista.
+4. Generar el código HTML necesario y responder al navegador para su renderización.
