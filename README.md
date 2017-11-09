@@ -48,3 +48,37 @@ http://bibliotecav.dev
   - Llamar al controlador requerido con su acción y parámetros.
 3. Ejecutar la acción solicitada que terminará en el llamado de una vista.
 4. Generar el código HTML necesario y responder al navegador para su renderización.
+
+# Formato de entrega
+## Archivo readme en Markdown
+- Titulo
+- Subitulo
+- Imágenes
+- Hypervinculos
+- Negrita
+- Codigo
+- Listas ordenadas
+- Listas desordenadas
+- Citas
+
+## Pasos para la instalacion, configuracion y uso del proyecto
+
+### Requerimientos (lista)
+- Servidor web
+- Servidor de aplicaciones
+- Servidor de Base de datos
+- \* Recomendaciones
+- Instalacion de XAMPP
+
+### Instalacion del proyecto
+- Descarga del codigo fuente (c:\xampp\htdocs)
+> \* Cambiar nombre de directorio
+Creacion de la base de datos
+
+### Configuracion del poyecto
+- DNS local (biblioteca.dev)
+- Apache global (httpd.conf)
+- Apache vhosts (httpd-vhosts.conf)
+
+### Uso del proyecto
+Navegador (http://biblioteca.dev)
