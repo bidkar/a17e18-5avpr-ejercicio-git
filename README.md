@@ -1,3 +1,6 @@
+# Lista de cotejo para autoevaluación
+[Ingresar aquí](https://goo.gl/forms/o7nrQIsudBotHSPl1)
+
 # Biblioteca CETis108
 
 ## Descripción
